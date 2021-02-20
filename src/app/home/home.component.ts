@@ -11,8 +11,8 @@ import { ArtistsAPI } from '../api/artitsts.api';
 export class HomeComponent implements OnInit,AfterViewInit {
   artists: any;
   artistSelected = false;
-  displayedColumns = ['id', 'title', 'title_short'];
-  dataSource = new MatTableDataSource<any>();
+  displayedColumns = ['id','picture', 'name','nb_fan'];
+  artistSource = new MatTableDataSource<any>();
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -24,15 +24,15 @@ export class HomeComponent implements OnInit,AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+    this.artistSource.sort = this.sort;
+    this.artistSource.paginator = this.paginator;
   }
 
   artistFilter(filterValue: string) {
     this.homeService.getArtists(filterValue).subscribe(
       res => {
         this.artists = res;
-        this.dataSource.data = this.artists.data;
+        this.artistSource.data = this.artists.data;
       },
       err => {
         console.error(err);

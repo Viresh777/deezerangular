@@ -8,7 +8,7 @@ export class ArtistsAPI {
   constructor(private http: HttpClient) {}
 
   getArtists(queryString) {
-    let apiUrl = `https://api.deezer.com/search?q=${queryString}`;
+    let apiUrl = `https://api.deezer.com/search/artist?q=${queryString}`;
     return this.Get({ url: apiUrl });
   }
 
