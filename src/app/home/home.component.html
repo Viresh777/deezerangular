@@ -22,15 +22,10 @@
     <mat-cell *matCellDef="let element">{{ element.name }}</mat-cell>
   </ng-container>
 
-  <ng-container matColumnDef="nb_fan">
-    <mat-header-cell *matHeaderCellDef mat-sort-header
-      >Number of Fans</mat-header-cell
-    >
-    <mat-cell *matCellDef="let element">{{ element.nb_fan }}</mat-cell>
-  </ng-container>
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row
     *matRowDef="let row; columns: displayedColumns"
+    (click)="getDetail(row.id)"
   ></mat-row>
 
 </mat-table>

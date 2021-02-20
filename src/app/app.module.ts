@@ -11,10 +11,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HomeComponent } from './home/home.component';
 import { SharedModule } from './api/shared.module';
+
+import { DialogComponent } from './dialog/dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    DialogComponent
   ],
   imports: [
     AppRoutingModule,
@@ -27,6 +30,9 @@ import { SharedModule } from './api/shared.module';
     FlexLayoutModule,
     MaterialModule,
     SharedModule
+  ],
+  entryComponents: [
+    DialogComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
