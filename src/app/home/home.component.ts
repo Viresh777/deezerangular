@@ -9,9 +9,8 @@ import { ArtistsAPI } from '../api/artitsts.api';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit,AfterViewInit {
-  categories: any;
-  categorySelected = false;
-  categoryName: string;
+  artists: any;
+  artistSelected = false;
   displayedColumns = ['id', 'title', 'title_short'];
   dataSource = new MatTableDataSource<any>();
 
@@ -32,18 +31,12 @@ export class HomeComponent implements OnInit,AfterViewInit {
   artistFilter(filterValue: string) {
     this.homeService.getArtists(filterValue).subscribe(
       res => {
-        this.categories = res;
-        this.dataSource.data = this.categories.data;
+        this.artists = res;
+        this.dataSource.data = this.artists.data;
       },
       err => {
         console.error(err);
       }
     );
   }
-
-  // setSelectedCategory(category) {
-  //   sessionStorage.setItem('category', JSON.stringify(category));
-  //   this.categorySelected = true;
-  //   this.categoryName = category.shortname;
-  // }
 }
