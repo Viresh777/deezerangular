@@ -1,0 +1,76 @@
+<div id="artist" class="artist">					
+    <div class="artist_photo">
+        <img id="artist_photo"src="{{obj.picture_xl}}" class="card-img-top pointer rounded-circle">
+    </div>
+    <div class="artist_info">
+        <span> {{obj.name}}</span>
+
+        <div class="_info">
+            <span>{{obj.nb_fan}} fans</span>
+        </div>
+    </div>	
+    <div style="clear:both;"></div>
+</div>
+
+
+<mat-tab-group>
+    <mat-tab label="Top Tracks">
+        <mat-table [dataSource]="artistsAPI.artistsTopTracksData$" matSort>
+
+            <ng-container matColumnDef="audio">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                                <audio controls>
+                                        <source src="{{ element.preview }}" type="audio/ogg">
+                                        <source src="{{ element.preview }}" type="audio/mpeg">
+                                      Your browser does not support the audio element.
+                                      </audio>
+                        </mat-cell>
+            </ng-container>
+            
+                      
+            <ng-container matColumnDef="title">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Title</mat-header-cell>
+              <mat-cell *matCellDef="let element">{{ element.title }}</mat-cell>
+            </ng-container>
+          
+            <mat-header-row *matHeaderRowDef="topTracksDisplayedColumns"></mat-header-row>
+            <mat-row
+              *matRowDef="let row; columns: topTracksDisplayedColumns"
+            ></mat-row>
+          </mat-table>
+
+          
+<!-- <mat-paginator 
+#paginator
+[pageSize]="5"
+[pageSizeOptions]="[5, 10, 20]"
+></mat-paginator> -->
+    </mat-tab>
+    <mat-tab label="Albums">
+            <!-- <mat-table [dataSource]="artistsAPI.artistsAlbumsData$" matSort>
+              
+                <ng-container matColumnDef="title">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Title</mat-header-cell>
+                  <mat-cell *matCellDef="let element">{{ element.title }}</mat-cell>
+                </ng-container>
+              
+                <mat-header-row *matHeaderRowDef="artistAlbumDisplayedColumns"></mat-header-row>
+                <mat-row
+                  *matRowDef="let row; columns: artistAlbumDisplayedColumns"
+                ></mat-row>
+              </mat-table> -->
+              <div class="row mt-5" *ngIf="artistsAPI.artistsAlbumsData$">
+                <div class="col-md-4 my-2" *ngFor="let element of artistsAPI.artistsAlbumsData$">
+                    <div class="card">
+                        <img src="{{element.cover_medium}}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <b><h5 class="card-title">{{element.title}}</h5></b>
+                            <span class="card_info">{{element.release_date}}</span>
+                        </div>
+                    </div>
+                </div>
+              </div>
+    </mat-tab>
+</mat-tab-group>
+  

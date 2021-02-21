@@ -1,0 +1,19 @@
+
+<!-- Search form -->
+<mat-form-field>
+  <mat-label>Search</mat-label>
+  <input matInput  (keyup)="artistFilter($event.target.value)" placeholder="Filter" #input>
+</mat-form-field>
+
+
+<div class="row mt-5" *ngIf="artistsAPI.artistsData$">
+  <div class="col-md-4 my-2" *ngFor="let element of artistsAPI.artistsData$">
+      <div class="card">
+          <img src="{{element.picture_medium}}" class="card-img-top pointer" alt="..." (click) ="goToArtistDetail(element)">
+          <div class="card-body pointer" (click) ="goToArtistDetail(element)">
+            <b><h5 class="card-title">{{element.name}}</h5></b>
+            <span class="_info">{{element.nb_fan}} Fans</span>
+          </div>
+      </div>
+  </div>
+</div>

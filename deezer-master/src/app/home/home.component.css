@@ -1,0 +1,32 @@
+.pointer {cursor: pointer;}
+
+.selected-category {
+  text-align: center;
+}
+
+.link {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+
+  border: none;
+}
+
+.card-img, .card-img-top {
+  border-radius: 50%;
+}
+
+._info {
+  font-size: 15px;
+  color: #31859D;
+}
