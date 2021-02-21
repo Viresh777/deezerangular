@@ -4,42 +4,29 @@ import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { ArtistsAPI } from '../api/artitsts.api';
 import { MatDialog } from '@angular/material';
 import { DialogComponent } from '../dialog/dialog.component';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit,AfterViewInit {
+export class HomeComponent implements OnInit {
   artists: any;
   artistSelected = false;
   displayedColumns = ['id','picture', 'name'];
   filterArtistDetail : any;
   artistSource = new MatTableDataSource<any>();
 
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private homeService: ArtistsAPI,private dialog: MatDialog) {}
+  constructor(private artistsAPI: ArtistsAPI,private dialog: MatDialog,private router: Router) {}
 
   ngOnInit() {
-
-  }
-
-  ngAfterViewInit() {
-    this.artistSource.sort = this.sort;
-    this.artistSource.paginator = this.paginator;
+    //this.artistFilter('');  
   }
 
   artistFilter(filterValue: string) {
-    this.homeService.getArtists(filterValue).subscribe(
-      res => {
-        this.artists = res;
-        this.artistSource.data = this.artists.data;
-      },
-      err => {
-        console.error(err);
-      }
-    );
+    this.artistsAPI.getArtists(filterValue);
   }
 
   getDetail(artistID){
@@ -49,6 +36,10 @@ export class HomeComponent implements OnInit,AfterViewInit {
    });
    //Was going to use expandable columns, but ran out of time here, so used dialog to display results(stringified WIP)
     this.openAlertDialog('',JSON.stringify(this.filterArtistDetail),artistID);
+  }
+
+  goToArtistDetail(data) {
+    this.router.navigate(['artist-detail'], {state: {data}});
   }
 
   openAlertDialog(title,message,navigate) {

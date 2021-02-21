@@ -7,12 +7,29 @@ export class ArtistsAPI {
 
   constructor(private http: HttpClient) {}
 
+  artistsData$;
+  artistsTopTracksData$;
+  artistsAlbumsData$;
+
   getArtists(queryString) {
     let apiUrl = `https://api.deezer.com/search/artist?q=${queryString}`;
-    return this.Get({ url: apiUrl });
+    return this.http.get(this.cors_api_url + apiUrl).subscribe(async (data: {data: any}) => {
+      this.artistsData$ = await data.data;
+    });
   }
 
-  private Get(options) {
-    return this.http.get(this.cors_api_url + options.url);
+  getTopTracksArtists(artistID) {
+    let apiUrl = `https://api.deezer.com/artist/${artistID}/top`;
+    return this.http.get(this.cors_api_url + apiUrl).subscribe(async (data: {data: any}) => {
+      this.artistsTopTracksData$ = await data.data;
+    });
   }
+
+  getArtistsAlbums(artistID) {
+    let apiUrl = `https://api.deezer.com/artist/${artistID}/albums`;
+    return this.http.get(this.cors_api_url + apiUrl).subscribe(async (data: {data: any}) => {
+      this.artistsAlbumsData$ = await data.data;
+    });
+  }
+
 }

@@ -1,4 +1,4 @@
-<div>
+
 <!-- Search form -->
 <mat-form-field>
   <mat-label>Search</mat-label>
@@ -6,33 +6,14 @@
 </mat-form-field>
 
 
-<mat-table [dataSource]="artistSource" matSort>
-  <ng-container matColumnDef="id">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>#</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{ element.id }}</mat-cell>
-  </ng-container>
-
-  <ng-container matColumnDef="picture">
-    <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
-    <mat-cell *matCellDef="let element"><img [src]="element.picture" /></mat-cell>
-  </ng-container>
-
-  <ng-container matColumnDef="name">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{ element.name }}</mat-cell>
-  </ng-container>
-
-  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row
-    *matRowDef="let row; columns: displayedColumns"
-    (click)="getDetail(row.id)"
-  ></mat-row>
-
-</mat-table>
-
-<mat-paginator
-  #paginator
-  [pageSize]="5"
-  [pageSizeOptions]="[5, 10, 20]"
-></mat-paginator>
+<div class="row mt-5" *ngIf="artistsAPI.artistsData$">
+  <div class="col-md-4 my-2" *ngFor="let element of artistsAPI.artistsData$">
+      <div class="card">
+          <img src="{{element.picture_medium}}" class="card-img-top pointer" alt="..." (click) ="goToArtistDetail(element)">
+          <div class="card-body pointer" (click) ="goToArtistDetail(element)">
+            <b><h5 class="card-title">{{element.name}}</h5></b>
+            <span class="_info">{{element.nb_fan}} Fans</span>
+          </div>
+      </div>
+  </div>
 </div>

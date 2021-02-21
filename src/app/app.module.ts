@@ -11,13 +11,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HomeComponent } from './home/home.component';
 import { SharedModule } from './api/shared.module';
-
+import { NavbarComponent } from './navbar/navbar.component';
 import { DialogComponent } from './dialog/dialog.component';
+import { ArtistDetailComponent } from './artist-detail/artist-detail.component';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    DialogComponent
+    DialogComponent,
+    NavbarComponent,
+    ArtistDetailComponent
   ],
   imports: [
     AppRoutingModule,
